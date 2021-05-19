@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.generics import (
@@ -12,6 +14,8 @@ from .serializers import (
     UserLoginSerializer,
     TokenSerializer,
 )
+
+logger = logging.getLogger("django")
 
 
 class UserRegistrationAPIView(CreateAPIView):
@@ -30,7 +34,7 @@ class UserRegistrationAPIView(CreateAPIView):
         data["token"] = token.key
 
         headers = self.get_success_headers(serializer.data)
-        print(headers)
+        logger.info("User registered")
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 
 
@@ -66,6 +70,7 @@ class UserTokenAPIView(RetrieveDestroyAPIView):
 
     def destroy(self, request, *args, **kwargs):
         Token.objects.get(key=request.auth.key).delete()
+        logger.info("User logged out successfully")
         return Response(
             data={"message": "User logged out"},
             status=status.HTTP_204_NO_CONTENT
