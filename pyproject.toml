@@ -8,6 +8,7 @@ authors = ["Pedro da Matta <pmrm@cin.ufpe.br>"]
 python = "^3.9"
 Django = "^3.2.3"
 djangorestframework = "^3.12.4"
+black = "^21.5b1"
 
 [tool.poetry.dev-dependencies]
 
