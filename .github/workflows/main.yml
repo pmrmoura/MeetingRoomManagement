@@ -34,7 +34,7 @@ jobs:
         uses: actions/cache@v2.1.5
         with:
           path: ~/.cache/poetry/virtualenvs
-          key: ${{runner.os}}-poetry-{{hashFiles("poetry.lock")}}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: | 
             ${{runner.os}}-poetry-
           
