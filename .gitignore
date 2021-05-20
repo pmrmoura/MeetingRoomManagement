@@ -1,6 +1,8 @@
 .DS_Store
 .vscode
 db.sqlite3
+data/
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
