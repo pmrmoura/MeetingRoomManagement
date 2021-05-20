@@ -93,10 +93,7 @@ class UserTokenAPIViewTestCase(APITestCase):
     def setUp(self):
         self.username = "ronaldo"
         self.password = "ronaldinho"
-        self.user = User.objects.create(
-            username=self.username,
-            password=self.password
-        )
+        self.user = User.objects.create(username=self.username, password=self.password)
         self.token = Token.objects.create(user=self.user)
         self.api_authentication()
 

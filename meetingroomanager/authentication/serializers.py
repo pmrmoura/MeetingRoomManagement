@@ -20,7 +20,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, attributes):
         logger.info("Generating password hash")
-        attributes['password'] = make_password(attributes['password'])
+        attributes["password"] = make_password(attributes["password"])
         return attributes
 
 
@@ -29,7 +29,7 @@ class UserLoginSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     default_error_messages = {
-        'invalid_credentials': _('Unable to login with provided credentials.')
+        "invalid_credentials": _("Unable to login with provided credentials.")
     }
 
     def __init__(self, *args, **kwargs):
@@ -38,17 +38,21 @@ class UserLoginSerializer(serializers.Serializer):
 
     def validate(self, attributes):
         logger.info("Validating user credentials")
-        self.user = authenticate(username=attributes.get("username"), password=attributes.get('password'))
+        self.user = authenticate(
+            username=attributes.get("username"), password=attributes.get("password")
+        )
         if self.user:
             logger.info("Validated user credentials")
             return attributes
         else:
             logger.info("User credentials not valid")
-            raise serializers.ValidationError(self.error_messages['invalid_credentials'])
+            raise serializers.ValidationError(
+                self.error_messages["invalid_credentials"]
+            )
 
 
 class TokenSerializer(serializers.ModelSerializer):
-    auth_token = serializers.CharField(source='key')
+    auth_token = serializers.CharField(source="key")
 
     class Meta:
         model = Token

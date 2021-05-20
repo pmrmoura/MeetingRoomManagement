@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  app:
+    container_name: meetingroomanager
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    environment:
+      DJANGO_SECRET: django-insecure-x*2mce!sg-*0q%a4wepra#j&*4bzkig5g2l&dj_^d)6rc9i-wn
+      DEBUG: 'False'
+    volumes:
+      - .:/app
+      - sqlite3:/app/db.sqlite3
+    ports:
+      - "8080:8080"
+
+volumes:
+  sqlite3:

@@ -72,6 +72,5 @@ class UserTokenAPIView(RetrieveDestroyAPIView):
         Token.objects.get(key=request.auth.key).delete()
         logger.info("User logged out successfully")
         return Response(
-            data={"message": "User logged out"},
-            status=status.HTTP_204_NO_CONTENT
+            data={"message": "User logged out"}, status=status.HTTP_204_NO_CONTENT
         )
