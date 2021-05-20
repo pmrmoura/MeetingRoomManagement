@@ -19,6 +19,10 @@ RUN pip install gunicorn
 
 WORKDIR /app
 
+RUN apt-get update && \
+    apt-get install -y netcat && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY --from=build /app/requirements.txt .
 
 RUN pip install -r requirements.txt

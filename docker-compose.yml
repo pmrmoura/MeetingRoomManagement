@@ -1,19 +1,40 @@
 version: '3.5'
 
 services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
   app:
     container_name: meetingroomanager
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
+    build: .
     environment:
       DJANGO_SECRET: django-insecure-x*2mce!sg-*0q%a4wepra#j&*4bzkig5g2l&dj_^d)6rc9i-wn
       DEBUG: 'False'
-    volumes:
-      - .:/app
-      - sqlite3:/app/db.sqlite3
     ports:
       - "8080:8080"
+    depends_on: 
+      - db
+      - migrate
+    env_file:
+      - ./.env
+  
+  migrate:
+    build: .
+    entrypoint: bash entrypoint.sh
+    volumes: 
+      - ./entrypoint.sh:/app/entrypoint.sh
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+      
 
 volumes:
-  sqlite3:
+  postgres_data:
+

@@ -24,7 +24,7 @@ class ReservationSerializer(serializers.ModelSerializer):
     def validate(self, attributes):
         room = attributes["room"]
         start_date = attributes["from_date"]
-        end_date = attributes["to_date"]
+        end_date = attributes["to_data"]
         title = attributes["title"]
 
         are_dates_valid = self.check_dates(start_date, end_date)

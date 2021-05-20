@@ -10,6 +10,7 @@ Django = "^3.2.3"
 djangorestframework = "^3.12.4"
 black = "^21.5b1"
 flake8 = "^3.9.2"
+psycopg2-binary = "^2.8.6"
 
 [tool.poetry.dev-dependencies]
 
