@@ -9,19 +9,33 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('reservation', '0001_initial'),
+        ("reservation", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Reservation',
+            name="Reservation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('from_date', models.DateTimeField()),
-                ('to_data', models.DateTimeField()),
-                ('employees', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
-                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.meetingroom')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("from_date", models.DateTimeField()),
+                ("to_data", models.DateTimeField()),
+                ("employees", models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
+                (
+                    "room",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="reservation.meetingroom",
+                    ),
+                ),
             ],
         ),
     ]

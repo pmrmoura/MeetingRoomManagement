@@ -63,6 +63,12 @@ TEMPLATES = [
     },
 ]
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=reservation,authentication',
+]
+
 WSGI_APPLICATION = "meetingroomanager.wsgi.application"
 
 

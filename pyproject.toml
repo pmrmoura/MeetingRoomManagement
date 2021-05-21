@@ -11,6 +11,8 @@ djangorestframework = "^3.12.4"
 black = "^21.5b1"
 flake8 = "^3.9.2"
 psycopg2-binary = "^2.8.6"
+django-nose = "^1.4.7"
+coverage = "^5.5"
 
 [tool.poetry.dev-dependencies]
 
