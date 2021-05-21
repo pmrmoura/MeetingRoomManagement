@@ -15,6 +15,13 @@ jobs:
     # The type of runner that the job will run on
     env: # Or as an environment variable
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      DEBUG: ${{ secrets.DEBUG }}
+      ENGINE: ${{ secrets.ENGINE }}
+      NAME: ${{ secrets.NAME }}
+      USER: ${{ secrets.USER }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      HOST: ${{ secrets.HOST }}
+      PORT: ${{ secrets.PORT }}
     runs-on: ubuntu-latest
 
     services:
