@@ -4,7 +4,6 @@ db.sqlite3
 data/
 .env
 settings-dev.py
-migrations/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
