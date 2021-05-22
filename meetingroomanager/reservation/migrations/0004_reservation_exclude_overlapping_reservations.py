@@ -9,12 +9,25 @@ import reservation.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reservation', '0003_auto_20210521_0353'),
+        ("reservation", "0003_auto_20210521_0353"),
     ]
 
     operations = [
         migrations.AddConstraint(
-            model_name='reservation',
-            constraint=django.contrib.postgres.constraints.ExclusionConstraint(expressions=((reservation.models.TsTzRange('from_date', 'to_data', django.contrib.postgres.fields.ranges.RangeBoundary()), '&&'), ('room', '=')), name='exclude_overlapping_reservations'),
+            model_name="reservation",
+            constraint=django.contrib.postgres.constraints.ExclusionConstraint(
+                expressions=(
+                    (
+                        reservation.models.TsTzRange(
+                            "from_date",
+                            "to_data",
+                            django.contrib.postgres.fields.ranges.RangeBoundary(),
+                        ),
+                        "&&",
+                    ),
+                    ("room", "="),
+                ),
+                name="exclude_overlapping_reservations",
+            ),
         ),
     ]

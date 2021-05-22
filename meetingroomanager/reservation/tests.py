@@ -1,5 +1,3 @@
-import json
-
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
@@ -70,7 +68,7 @@ class MeetingRoomTestCase(APITestCase):
         """
         self.api_authentication()
         test_room = MeetingRoom.objects.create(name="test_room")
-        self.get_URL("detail", kwargs={'pk': test_room.id})
+        self.get_URL("detail", kwargs={"pk": test_room.id})
         response = self.client.delete(self.url)
         self.assertEqual(204, response.status_code)
 
@@ -109,7 +107,7 @@ class ReservationTestCase(APITestCase):
             "from_date": "2021-12-14T23:20:05Z",
             "to_data": "2021-12-14T23:20:09Z",
             "room": self.room.id,
-            "employees": [self.user.id]
+            "employees": [self.user.id],
         }
         self.api_authentication()
         response = self.client.post(self.url, reservation_data)
@@ -124,7 +122,7 @@ class ReservationTestCase(APITestCase):
             "from_date": "2021-12-14T23:20:05Z",
             "to_data": "2021-12-14T23:20:09Z",
             "room": self.room.id,
-            "employees": [self.user.id]
+            "employees": [self.user.id],
         }
         first_reservation = Reservation.objects.create(
             title="Deciding2",
@@ -149,7 +147,7 @@ class ReservationTestCase(APITestCase):
             "from_date": "2021-12-12T23:20:05Z",
             "to_data": "2021-12-14T23:20:09Z",
             "room": self.room.id,
-            "employees": [self.user.id]
+            "employees": [self.user.id],
         }
         first_reservation = Reservation.objects.create(
             title="Deciding3",
@@ -163,7 +161,7 @@ class ReservationTestCase(APITestCase):
         with self.assertRaises(Exception) as raised:
             self.client.post(self.url, reservation_data)
         self.assertEqual(IntegrityError, type(raised.exception))
-    
+
     def test_create_reservation_with_missing_fields(self):
         """
         Test reservation creation with missing fields (title)
@@ -172,7 +170,7 @@ class ReservationTestCase(APITestCase):
             "from_date": "2021-12-14T23:20:05Z",
             "to_data": "2021-12-14T23:20:09Z",
             "room": self.room.id,
-            "employees": [self.user.id]
+            "employees": [self.user.id],
         }
         self.api_authentication()
         response = self.client.post(self.url, reservation_data)
@@ -191,6 +189,6 @@ class ReservationTestCase(APITestCase):
             room=self.room,
         )
         reservation.employees.set([self.user.id])
-        self.get_URL("detail", kwargs={'pk': reservation.id})
+        self.get_URL("detail", kwargs={"pk": reservation.id})
         response = self.client.delete(self.url)
         self.assertEqual(204, response.status_code)

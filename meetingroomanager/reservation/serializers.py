@@ -28,9 +28,7 @@ class ReservationSerializer(serializers.ModelSerializer):
         are_dates_valid = self.check_dates(start_date, end_date)
 
         if not are_dates_valid:
-            raise serializers.ValidationError(
-                "end_date must be bigger than start_date"
-            )
+            raise serializers.ValidationError("end_date must be bigger than start_date")
 
         logger.info("Dates validated")
 
