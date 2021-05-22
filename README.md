@@ -252,3 +252,5 @@ You should put the token you received either on Login or Registration in the oth
  
 # Observations
 - Implemented a Github Action named CI to run all the test after each commit pushed to any branch
+- Used postgres database constraints to not allow meetings being created with date overlap
+- Update readme
