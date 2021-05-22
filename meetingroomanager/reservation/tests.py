@@ -163,3 +163,34 @@ class ReservationTestCase(APITestCase):
         with self.assertRaises(Exception) as raised:
             self.client.post(self.url, reservation_data)
         self.assertEqual(IntegrityError, type(raised.exception))
+    
+    def test_create_reservation_with_missing_fields(self):
+        """
+        Test reservation creation with missing fields (title)
+        """
+        reservation_data = {
+            "from_date": "2021-12-14T23:20:05Z",
+            "to_data": "2021-12-14T23:20:09Z",
+            "room": self.room.id,
+            "employees": [self.user.id]
+        }
+        self.api_authentication()
+        response = self.client.post(self.url, reservation_data)
+        self.assertEqual(400, response.status_code)
+
+    def test_delete_reservation(self):
+        """
+        Test to verify that reservations are deleted
+        when user is authenticated
+        """
+        self.api_authentication()
+        reservation = Reservation.objects.create(
+            title="Deciding3",
+            from_date="2021-12-11T23:20:05Z",
+            to_data="2021-12-14T23:20:09Z",
+            room=self.room,
+        )
+        reservation.employees.set([self.user.id])
+        self.get_URL("detail", kwargs={'pk': reservation.id})
+        response = self.client.delete(self.url)
+        self.assertEqual(204, response.status_code)
