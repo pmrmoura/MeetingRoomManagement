@@ -2,7 +2,6 @@
 .vscode
 db.sqlite3
 data/
-.env
 settings-dev.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
